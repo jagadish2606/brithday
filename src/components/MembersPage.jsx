@@ -10,6 +10,7 @@ const MembersPage = () => {
       email: 'jagadishkamil.141@gmail.com',
       role: 'Best Friend',
       profileImg: './images/members/hari.jpeg',
+      Img: './images/members/hari.jpeg',
       bio: 'Hari is the most caring and supportive friend anyone could ask for. He loves hiking, photography, and making people laugh.',
       wishes: [
         'Happy birthday to the most amazing person I know! May your day be filled with joy and laughter.',
@@ -23,6 +24,7 @@ const MembersPage = () => {
       email: 'bharath@example.com',
       role: 'Best Friend',
       profileImg: './images/members/Bharath.jpeg',
+      Img: './images/members/hari.jpeg',
       bio: 'Bharath is the tech genius of the group. He\'s always there to help with any gadget problems and makes the best jokes.',
       wishes: [
         'Wishing you endless happiness on your special day! You deserve the world.',
@@ -36,6 +38,7 @@ const MembersPage = () => {
       email: 'priya@example.com',
       role: 'Best Friend',
       profileImg: './images/members/priya.jpeg',
+      Img: './images/members/hari.jpeg',
       bio: 'Priya is my partner in crime and the most creative person I know. She\'s an amazing artist and the best listener.',
       wishes: [
         'To my dearest friend, may your birthday be as wonderful as you are!',
@@ -49,6 +52,7 @@ const MembersPage = () => {
       email: 'anuja@example.com',
       role: 'Best Friend',
       profileImg: './images/members/anuja.jpeg',
+      Img: './images/members/hari.jpeg',
       bio: 'Anuja is the life of every party and has the most contagious laugh. She loves animals and has a big heart.',
       wishes: [
         'Happy birthday! Let\'s make this year the best one yet!',
@@ -61,39 +65,40 @@ const MembersPage = () => {
       name: 'Durga Shree',
       email: 'durga@example.com',
       role: 'Best Friend',
-      profileImg: './images/members/durga.jpeg',
-      bio: 'Durga is the most reliable friend you can count on. She always knows how to cheer you up when you\'re down.',
+      profileImg: './images/members/durga.jpg',
+      Img: './images/members/revaAndDurga.jpg',
+      bio: 'Hey my gurl!!U deserve for best things in this world da.. the gurl with strong mindset and kind hearted one.. who can do anything for her loved ones and the pure soul who always keeps her circle engaged and happiee',
       wishes: [
-        'Happy birthday! Your positivity is contagious and inspiring!',
-        'May this year bring you all the happiness you bring to others!'
+        'Hold ur smile always da..Everything will be fine soon and hope for best da.. u really surrounded by the gud souls in ur life so plzz hold them tight and go forward confidently:) will be there with u always da... Love u always my gurl... Always ennudaya avall💯🫂'
       ],
-      funFact: 'She can recite all the dialogues from her favorite movies.'
+      funFact: 'All the time and place where we all together is the most funniest one..I love to be with u always gurl... Anywhere with u sounds like hahahahaha!'
     },
     {
       id: 6,
       name: 'Tharun',
       email: 'tharun@example.com',
       role: 'Best Friend',
-      profileImg: './images/members/tharun.jpeg',
-      bio: 'Tharun is the calm in every storm. His wisdom and patience make him an incredible friend.',
+      profileImg: './images/members/tharun.jpg',
+      Img: './images/members/tharunAndReva.jpg',
+      bio: 'She is a very caring person,she made me more mature and the only person who stood up with me for the past 7 years',
       wishes: [
-        'Wishing you peace, joy and success this year and always!',
-        'Your friendship means the world to me - happy birthday!'
+       " Everything will be alright soon, hold ur smile and always be happy"
       ],
-      funFact: 'He meditates every morning without fail.'
+      funFact: "Food can change her mood in seconds it's her superpower."
     },
     {
       id: 7,
       name: 'Dinesh',
       email: 'dinesh@example.com',
       role: 'Bro',
-      profileImg: './images/members/dinesh.jpeg',
-      bio: 'Dinesh is like a brother to me. His loyalty and support have been unwavering through thick and thin.',
+      profileImg: './images/members/dinesh.jpg',
+      Img: './images/members/dineshAndReva.jpg',
+      bio: "Dear Sister, No matter where life takes us, you'll always be my first best friend and forever strength. You've been my constant in every storm, my biggest cheerleader, and the one who knows me better than I know myself.I may not say it every day, but I’m truly blessed to have you in my life. Thank you for the love, laughter, and endless support. I’ll always be here for you, just like you’ve always been for me.Love you more than words can express.❤‍",
       wishes: [
-        'Happy birthday bro! No matter where life takes us, you\'ll always be family!',
-        'Here\'s to many more years of friendship and brotherhood!'
+        'Happy birthday',
+        
       ],
-      funFact: 'He can eat 10 idlis in one sitting!'
+      funFact: 'My sister is truly one of a kind — if she wants something, she wants it right now, no matter what time it is 😅. She always says ‘No more junk food’ but ends up eating it again the next day 😂. I really miss those days when we were at home… disturbing her while she was on calls or doing some work was my favorite part 😜. Life feels incomplete without those silly moments. Love you always, my drama queen ❤'
     }
   ];
 
@@ -284,7 +289,7 @@ const MembersPage = () => {
                   >
                     <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent z-10"></div>
                     <motion.img
-                      src={selectedMember.profileImg}
+                      src={selectedMember.Img}
                       alt={selectedMember.name}
                       className="w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 rounded-full object-cover border-4 md:border-8 border-white shadow-xl z-20 relative"
                       initial={{ scale: 0.9, rotate: -5 }}

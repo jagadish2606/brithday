@@ -362,7 +362,7 @@ const MembersPage = () => {
                     <div className="border-t border-gray-200 pt-4">
                       <div className="flex justify-between items-center mb-4">
                         <h3 className="text-lg md:text-xl font-semibold text-gray-800 flex items-center">
-                          <span className="mr-2">💌</span> Birthday Wishes
+                          <span className="mr-2">💌</span> Message to You
                         </h3>
                         {selectedMember.wishes.length > 1 && (
                           <div className="flex items-center space-x-2">

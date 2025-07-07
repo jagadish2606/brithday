@@ -23,7 +23,7 @@ const MembersPage = () => {
       name: 'Bharath',
       email: 'bharath@example.com',
       role: 'Best Friend',
-      profileImg: './images/members/Bharath.jpeg',
+      profileImg: './images/members/Bharath.jpg',
       Img: './images/members/hari.jpeg',
       bio: 'Bharath is the tech genius of the group. He\'s always there to help with any gadget problems and makes the best jokes.',
       wishes: [
@@ -38,27 +38,25 @@ const MembersPage = () => {
       email: 'priya@example.com',
       role: 'Best Friend',
       profileImg: './images/members/priya.jpeg',
-      Img: './images/members/hari.jpeg',
-      bio: 'Priya is my partner in crime and the most creative person I know. She\'s an amazing artist and the best listener.',
+      Img: './images/members/priyaAndReva.jpg',
+      bio: 'She cares a lot and always gives me good ideas. She’s one of my comfort places where I can share all my secrets without any fear..',
       wishes: [
-        'To my dearest friend, may your birthday be as wonderful as you are!',
-        'Here\'s to another year of inside jokes and unforgettable memories!'
+        'Stay happy always — I promise I’ll be there for you, no matter what.'
       ],
-      funFact: 'She can draw perfect circles freehand.'
+      funFact: 'She may get angry quickly, but it never lasts long — one joke or snack and she’s smiling again!'
     },
     {
       id: 4,
       name: 'Anuja',
       email: 'anuja@example.com',
       role: 'Best Friend',
-      profileImg: './images/members/anuja.jpeg',
-      Img: './images/members/hari.jpeg',
-      bio: 'Anuja is the life of every party and has the most contagious laugh. She loves animals and has a big heart.',
+      profileImg: './images/members/anuja.jpg',
+      Img: './images/members/anuAndReva.jpg',
+      bio: "She is the sweetest soul in the world and She was the one who made my college days memorable. And you are my safe and comfort place and remember that Reva I'm here for you whenever you need a shoulder to lean on and someone to  tell your worries, hold your smile gurl♥.",
       wishes: [
-        'Happy birthday! Let\'s make this year the best one yet!',
-        'Wishing you a year filled with love, success, and lots of puppy cuddles!'
+        'Happieee birthday to my prettiest human being 🫂. wishing you all the happiness and success in the world.lots of love and hugs from anu✨.'
       ],
-      funFact: 'She can imitate over 20 different animal sounds.'
+      funFact: 'Happieee birthday to my prettiest human being 🫂. wishing you all the happiness and success in the world.lots of love and hugs from anu✨.'
     },
     {
       id: 5,
@@ -95,7 +93,7 @@ const MembersPage = () => {
       Img: './images/members/dineshAndReva.jpg',
       bio: "Dear Sister, No matter where life takes us, you'll always be my first best friend and forever strength. You've been my constant in every storm, my biggest cheerleader, and the one who knows me better than I know myself.I may not say it every day, but I’m truly blessed to have you in my life. Thank you for the love, laughter, and endless support. I’ll always be here for you, just like you’ve always been for me.Love you more than words can express.❤‍",
       wishes: [
-        'Happy birthday',
+        'Happy birthday Dear Sister',
         
       ],
       funFact: 'My sister is truly one of a kind — if she wants something, she wants it right now, no matter what time it is 😅. She always says ‘No more junk food’ but ends up eating it again the next day 😂. I really miss those days when we were at home… disturbing her while she was on calls or doing some work was my favorite part 😜. Life feels incomplete without those silly moments. Love you always, my drama queen ❤'

@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const MembersPage = () => {
+  const navigate = useNavigate();
   const members = [
     {
       id: 1,
@@ -39,11 +40,11 @@ const MembersPage = () => {
       role: 'Best Friend',
       profileImg: './images/members/priya.jpeg',
       Img: './images/members/priyaAndReva.jpg',
-      bio: 'She cares a lot and always gives me good ideas. She’s one of my comfort places where I can share all my secrets without any fear..',
+      bio: "She cares a lot and always gives me good ideas. She's one of my comfort places where I can share all my secrets without any fear.",
       wishes: [
-        'Stay happy always — I promise I’ll be there for you, no matter what.'
+        "Stay happy always — I promise I'll be there for you, no matter what."
       ],
-      funFact: 'She may get angry quickly, but it never lasts long — one joke or snack and she’s smiling again!'
+      funFact: "She may get angry quickly, but it never lasts long — one joke or snack and she's smiling again!"
     },
     {
       id: 4,
@@ -52,11 +53,11 @@ const MembersPage = () => {
       role: 'Best Friend',
       profileImg: './images/members/anuja.jpg',
       Img: './images/members/anuAndReva.jpg',
-      bio: "She is the sweetest soul in the world and She was the one who made my college days memorable. And you are my safe and comfort place and remember that Reva I'm here for you whenever you need a shoulder to lean on and someone to  tell your worries, hold your smile gurl♥.",
+      bio: "She is the sweetest soul in the world and She was the one who made my college days memorable. And you are my safe and comfort place and remember that Reva I'm here for you whenever you need a shoulder to lean on and someone to tell your worries, hold your smile gurl♥.",
       wishes: [
-        'Happieee birthday to my prettiest human being 🫂. wishing you all the happiness and success in the world.lots of love and hugs from anu✨.'
+        'Happieee birthday to my prettiest human being 🫂. wishing you all the happiness and success in the world.lots of love and hugs from anu✨.'
       ],
-      funFact: 'Happieee birthday to my prettiest human being 🫂. wishing you all the happiness and success in the world.lots of love and hugs from anu✨.'
+      funFact: 'Happieee birthday to my prettiest human being 🫂. wishing you all the happiness and success in the world.lots of love and hugs from anu✨.'
     },
     {
       id: 5,
@@ -65,11 +66,11 @@ const MembersPage = () => {
       role: 'Best Friend',
       profileImg: './images/members/durga.jpg',
       Img: './images/members/revaAndDurga.jpg',
-      bio: 'Hey my gurl!!U deserve for best things in this world da.. the gurl with strong mindset and kind hearted one.. who can do anything for her loved ones and the pure soul who always keeps her circle engaged and happiee',
+      bio: 'Hey my gurl!!U deserve for best things in this world da.. the gurl with strong mindset and kind hearted one.. who can do anything for her loved ones and the pure soul who always keeps her circle engaged and happiee',
       wishes: [
         'Hold ur smile always da..Everything will be fine soon and hope for best da.. u really surrounded by the gud souls in ur life so plzz hold them tight and go forward confidently:) will be there with u always da... Love u always my gurl... Always ennudaya avall💯🫂'
       ],
-      funFact: 'All the time and place where we all together is the most funniest one..I love to be with u always gurl... Anywhere with u sounds like hahahahaha!'
+      funFact: 'All the time and place where we all together is the most funniest one..I love to be with u always gurl... Anywhere with u sounds like hahahahaha!'
     },
     {
       id: 6,
@@ -80,7 +81,7 @@ const MembersPage = () => {
       Img: './images/members/tharunAndReva.jpg',
       bio: 'She is a very caring person,she made me more mature and the only person who stood up with me for the past 7 years',
       wishes: [
-       " Everything will be alright soon, hold ur smile and always be happy"
+       "Everything will be alright soon, hold ur smile and always be happy"
       ],
       funFact: "Food can change her mood in seconds it's her superpower."
     },
@@ -91,18 +92,34 @@ const MembersPage = () => {
       role: 'Bro',
       profileImg: './images/members/dinesh.jpg',
       Img: './images/members/dineshAndReva.jpg',
-      bio: "Dear Sister, No matter where life takes us, you'll always be my first best friend and forever strength. You've been my constant in every storm, my biggest cheerleader, and the one who knows me better than I know myself.I may not say it every day, but I’m truly blessed to have you in my life. Thank you for the love, laughter, and endless support. I’ll always be here for you, just like you’ve always been for me.Love you more than words can express.❤‍",
+      bio: "Dear Sister, No matter where life takes us, you'll always be my first best friend and forever strength. You've been my constant in every storm, my biggest cheerleader, and the one who knows me better than I know myself.I may not say it every day, but I'm truly blessed to have you in my life. Thank you for the love, laughter, and endless support. I'll always be here for you, just like you've always been for me.Love you more than words can express.❤‍",
       wishes: [
         'Happy birthday Dear Sister',
-        
       ],
-      funFact: 'My sister is truly one of a kind — if she wants something, she wants it right now, no matter what time it is 😅. She always says ‘No more junk food’ but ends up eating it again the next day 😂. I really miss those days when we were at home… disturbing her while she was on calls or doing some work was my favorite part 😜. Life feels incomplete without those silly moments. Love you always, my drama queen ❤'
+      funFact: "My sister is truly one of a kind — if she wants something, she wants it right now, no matter what time it is 😅. She always says 'No more junk food' but ends up eating it again the next day 😂. I really miss those days when we were at home… disturbing her while she was on calls or doing some work was my favorite part 😜. Life feels incomplete without those silly moments. Love you always, my drama queen ❤"
+    },
+    {
+      id: 8,
+      name: 'Jagadish',
+      email: 'jagadish@example.com',
+      role: 'Best Friend',
+      profileImg: './images/members/jagadish.jpg',
+      Img: './images/members/jagadish.jpg',
+      bio: 'A very special person with a secret message for you.',
+      wishes: [
+        'I have something very special to tell you...'
+      ],
+      funFact: 'This person has a secret message protected by PIN',
+      hasSecret: true
     }
   ];
 
   const [selectedMember, setSelectedMember] = useState(members[0]);
   const [currentWishIndex, setCurrentWishIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
+  const [showPinModal, setShowPinModal] = useState(false);
+  const [pinInput, setPinInput] = useState('');
+  const [pinError, setPinError] = useState('');
   const profileRef = useRef(null);
 
   useEffect(() => {
@@ -125,10 +142,23 @@ const MembersPage = () => {
   };
 
   const selectMember = (member) => {
+    if (member.hasSecret) {
+      setShowPinModal(true);
+      return;
+    }
+    
     setSelectedMember(member);
     setCurrentWishIndex(0);
     if (isMobile && profileRef.current) {
       profileRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const handlePinSubmit = () => {
+    if (pinInput === "Panda@18") {
+      navigate('/jagadish');
+    } else {
+      setPinError("Incorrect PIN. Please try again.");
     }
   };
 
@@ -173,6 +203,18 @@ const MembersPage = () => {
     exit: { opacity: 0, y: -20 }
   };
 
+  const modalVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 },
+    exit: { opacity: 0 }
+  };
+
+  const modalContentVariants = {
+    hidden: { scale: 0.9, y: 20 },
+    visible: { scale: 1, y: 0 },
+    exit: { scale: 0.9, y: -20 }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 via-purple-50 to-blue-50 p-4 md:p-8 w-screen overflow-x-hidden">
       <div className="max-w-6xl mx-auto">
@@ -187,7 +229,7 @@ const MembersPage = () => {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="flex items-center text-sm font-medium text-gray-700 hover:text-pink-600 transition-colors"
+              className="flex items-center text-sm font-medium bg-gradient-to-r from-pink-500 to-purple-500 text-white px-4 py-2 rounded-full shadow-lg hover:shadow-xl transition-all"
             >
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                 <path fillRule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clipRule="evenodd" />
@@ -421,6 +463,66 @@ const MembersPage = () => {
           </motion.div>
         </div>
       </div>
+
+      {/* PIN Modal */}
+      <AnimatePresence>
+        {showPinModal && (
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={modalVariants}
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          >
+            <motion.div
+              variants={modalContentVariants}
+              className="bg-white rounded-xl p-6 max-w-md w-full shadow-xl"
+            >
+              <h3 className="text-xl font-bold text-gray-800 mb-4">Enter Secret PIN</h3>
+              <p className="text-gray-600 mb-4">To view Jagadish's special message, please enter the secret PIN.</p>
+              
+              <input
+                type="password"
+                value={pinInput}
+                onChange={(e) => {
+                  setPinInput(e.target.value);
+                  setPinError('');
+                }}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent mb-2"
+                placeholder="Enter PIN"
+                onKeyDown={(e) => e.key === 'Enter' && handlePinSubmit()}
+              />
+              
+              {pinError && (
+                <p className="text-red-500 text-sm">{pinError}</p>
+              )}
+              
+              <div className="flex justify-end gap-3 mt-6">
+                <motion.button
+                  onClick={() => {
+                    setShowPinModal(false);
+                    setPinInput('');
+                    setPinError('');
+                  }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition"
+                >
+                  Cancel
+                </motion.button>
+                <motion.button
+                  onClick={handlePinSubmit}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-lg shadow hover:shadow-md transition"
+                >
+                  Submit
+                </motion.button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

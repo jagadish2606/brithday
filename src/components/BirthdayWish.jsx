@@ -58,49 +58,49 @@ const BirthdayWish = () => {
     {
       id: 1,
       title: 'Beautiful Smile',
-      imageUrl: './images/reva.jpeg',
+      imageUrl: './images/reva@3.jpg',
       slogan: 'Your smile brightens every day',
       poem: 'A smile so pure, a heart so true,\nLike morning sun and sparkling dew.\nMay happiness follow wherever you go,\nAnd your inner light forever glow.'
     },
     {
       id: 2,
       title: 'Adventurous Spirit',
-      imageUrl: './images/reva.jpeg',
+      imageUrl: './images/reva@1.jpg',
       slogan: 'Life is an adventure with you',
       poem: 'Through every path you boldly tread,\nWith courage strong and dreams widespread.\nMay your journey be wild and free,\nFilled with joy and destiny.'
     },
     {
       id: 3,
       title: 'Kind Heart',
-      imageUrl: './images/reva.jpeg',
+      imageUrl: './images/reva@4.jpg',
       slogan: 'Your kindness touches every soul',
       poem: 'A heart so warm, so kind, so bright,\nShining like stars in darkest night.\nYour gentle ways, your caring touch,\nMean more to us than words can clutch.'
     },
     {
       id: 4,
       title: 'Creative Soul',
-      imageUrl: './images/reva.jpeg',
+      imageUrl: './images/reva@5.jpg',
       slogan: 'Your creativity inspires us all',
       poem: 'With colors bold and visions clear,\nYou paint the world we hold so dear.\nMay inspiration always flow,\nAnd your artistic spirit grow.'
     },
     {
       id: 5,
       title: 'Loving Friend',
-      imageUrl: './images/reva1.jpeg',
+      imageUrl: './images/reva@6.jpg',
       slogan: 'A friend like no other',
       poem: 'Through laughter shared and tears we\'ve known,\nA friendship beautifully grown.\nTreasure these bonds that time can\'t sever,\nHappy birthday, dear friend forever.'
     },
     {
       id: 6,
       title: 'Radiant Beauty',
-      imageUrl: './images/reva3.jpeg',
+      imageUrl: './images/reva@7.jpg',
       slogan: 'Your beauty shines inside and out',
       poem: 'Not just in face so fair to see,\nBut in the soul you let us be.\nA light that guides, a heart so true,\nThe world is brighter thanks to you.'
     },
     {
       id: 7,
       title: 'Dream Chaser',
-      imageUrl: './images/reva1.jpeg',
+      imageUrl: './images/reva@8.jpg',
       slogan: 'Keep chasing your dreams',
       poem: 'With every step, with every flight,\nYou reach for stars, you seek the light.\nMay all your dreams take shape and form,\nLike sunshine bright after the storm.'
     }

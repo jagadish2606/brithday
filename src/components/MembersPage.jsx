@@ -5,34 +5,34 @@ import { Link, useNavigate } from 'react-router-dom';
 const MembersPage = () => {
   const navigate = useNavigate();
   const members = [
-    {
-      id: 1,
-      name: 'Hari',
-      email: 'jagadishkamil.141@gmail.com',
-      role: 'Best Friend',
-      profileImg: './images/members/hari.jpeg',
-      Img: './images/members/hari.jpeg',
-      bio: 'Hari is the most caring and supportive friend anyone could ask for. He loves hiking, photography, and making people laugh.',
-      wishes: [
-        'Happy birthday to the most amazing person I know! May your day be filled with joy and laughter.',
-        'Wishing you another year of great adventures and happiness. Let\'s plan another trip soon!'
-      ],
-      funFact: 'He can solve a Rubik\'s cube in under 2 minutes!'
-    },
-    {
-      id: 2,
-      name: 'Bharath',
-      email: 'bharath@example.com',
-      role: 'Best Friend',
-      profileImg: './images/members/Bharath.jpg',
-      Img: './images/members/hari.jpeg',
-      bio: 'Bharath is the tech genius of the group. He\'s always there to help with any gadget problems and makes the best jokes.',
-      wishes: [
-        'Wishing you endless happiness on your special day! You deserve the world.',
-        'Can\'t wait to celebrate with you - I\'ve got the perfect birthday surprise planned!'
-      ],
-      funFact: 'He once built his own computer from scratch.'
-    },
+    // {
+    //   id: 1,
+    //   name: 'Hari',
+    //   email: 'jagadishkamil.141@gmail.com',
+    //   role: 'Best Friend',
+    //   profileImg: './images/members/hari.jpeg',
+    //   Img: './images/members/hari.jpeg',
+    //   bio: 'Hari is the most caring and supportive friend anyone could ask for. He loves hiking, photography, and making people laugh.',
+    //   wishes: [
+    //     'Happy birthday to the most amazing person I know! May your day be filled with joy and laughter.',
+    //     'Wishing you another year of great adventures and happiness. Let\'s plan another trip soon!'
+    //   ],
+    //   funFact: 'He can solve a Rubik\'s cube in under 2 minutes!'
+    // },
+    // {
+    //   id: 2,
+    //   name: 'Bharath',
+    //   email: 'bharath@example.com',
+    //   role: 'Best Friend',
+    //   profileImg: './images/members/Bharath.jpg',
+    //   Img: './images/members/hari.jpeg',
+    //   bio: 'Bharath is the tech genius of the group. He\'s always there to help with any gadget problems and makes the best jokes.',
+    //   wishes: [
+    //     'Wishing you endless happiness on your special day! You deserve the world.',
+    //     'Can\'t wait to celebrate with you - I\'ve got the perfect birthday surprise planned!'
+    //   ],
+    //   funFact: 'He once built his own computer from scratch.'
+    // },
     {
       id: 3,
       name: 'Priya',
@@ -53,11 +53,11 @@ const MembersPage = () => {
       role: 'Best Friend',
       profileImg: './images/members/anuja.jpg',
       Img: './images/members/anuAndReva.jpg',
-      bio: "She is the sweetest soul in the world and She was the one who made my college days memorable. And you are my safe and comfort place and remember that Reva I'm here for you whenever you need a shoulder to lean on and someone to tell your worries, hold your smile gurl♥.",
-      wishes: [
-        'Happieee birthday to my prettiest human being 🫂. wishing you all the happiness and success in the world.lots of love and hugs from anu✨.'
-      ],
-      funFact: 'Happieee birthday to my prettiest human being 🫂. wishing you all the happiness and success in the world.lots of love and hugs from anu✨.'
+      funFact: 'If she has to choose between food and anything else, she will definitely choose food. Food is everything to her! .',
+      bio: 
+        "She is the sweetest soul in the world and She was the one who made my college days memorable. And you are my safe and comfort place and remember that Reva I'm here for you whenever you need a shoulder to lean on and someone to tell your worries, hold your smile gurl♥."
+      ,
+      wishes: ['Happieee birthday to my prettiest human being 🫂. wishing you all the happiness and success in the world.lots of love and hugs from anu✨.']
     },
     {
       id: 5,
@@ -87,8 +87,21 @@ const MembersPage = () => {
     },
     {
       id: 7,
-      name: 'Dinesh',
+      name: 'Divya',
       email: 'dinesh@example.com',
+      role: 'Best Friend',
+      profileImg: './images/members/divya.jpg',
+      Img: './images/members/divyaAndReva.jpg',
+      bio: "Hi reva... You are the one of best person I have met😍 your  will always make people around you happy🤩. Always be happy",
+      wishes: [
+        "Always be happy... Be strong I know we don't communicate like we used to do but remember you will be always my best friend🫂.. Love you❤..",
+      ],
+      funFact: "Most of the things we did together are always funny to remember💫... From stealing lunch box during break to playing truth or dare in hostel and having sleepless night playing and chatting and so on.. Those are beautiful memories😍"
+    },
+    {
+      id: 1,
+      name: 'Dinesh',
+      email: '',
       role: 'Bro',
       profileImg: './images/members/dinesh.jpg',
       Img: './images/members/dineshAndReva.jpg',
@@ -97,6 +110,19 @@ const MembersPage = () => {
         'Happy birthday Dear Sister',
       ],
       funFact: "My sister is truly one of a kind — if she wants something, she wants it right now, no matter what time it is 😅. She always says 'No more junk food' but ends up eating it again the next day 😂. I really miss those days when we were at home… disturbing her while she was on calls or doing some work was my favorite part 😜. Life feels incomplete without those silly moments. Love you always, my drama queen ❤"
+    },
+    {
+      id: 9,
+      name: 'MK',
+      email: '',
+      role: 'Best Friend',
+      profileImg: './images/members/MK.jpg',
+      Img: './images/members/dineshAndReva.jpg',
+      bio: "Happiest birthday reva! Hope you are doing good Someone said it right that school friends never change❤such a beautiful soul you are ....love you so much da Friendship is the only cement that will ever hold the world together",
+      wishes: [
+        'Unaku sollanum na Life is short uh machi have fun😅',
+      ],
+      funFact: "In schoolhood days ..... every days filled with lots of love and fun ! Class edukura apo sapurathu..exam la bit adikurathu ...nee naa divi monu perum sernthu fun pannathu marakavae mudiyathu and skdrl na getha suthuti eruthom❤🫶that memories never fade da..."
     },
     {
       id: 8,
@@ -472,53 +498,86 @@ const MembersPage = () => {
             animate="visible"
             exit="exit"
             variants={modalVariants}
-            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50 p-4"
           >
             <motion.div
               variants={modalContentVariants}
-              className="bg-white rounded-xl p-6 max-w-md w-full shadow-xl"
+              className="bg-gradient-to-br from-pink-100 to-purple-100 rounded-2xl p-6 max-w-md w-full shadow-2xl border border-white/20"
             >
-              <h3 className="text-xl font-bold text-gray-800 mb-4">Enter Secret PIN</h3>
-              <p className="text-gray-600 mb-4">To view Jagadish's special message, please enter the secret PIN.</p>
+              <div className="text-center mb-6">
+                <motion.div 
+                  className="w-16 h-16 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg"
+                  initial={{ scale: 0.8, rotate: -20 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                  </svg>
+                </motion.div>
+                <h3 className="text-2xl font-bold text-gray-800 mb-2">Secret Message</h3>
+                <p className="text-gray-600">Enter the PIN to view Jagadish's special message</p>
+              </div>
               
-              <input
-                type="password"
-                value={pinInput}
-                onChange={(e) => {
-                  setPinInput(e.target.value);
-                  setPinError('');
-                }}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-transparent mb-2"
-                placeholder="Enter PIN"
-                onKeyDown={(e) => e.key === 'Enter' && handlePinSubmit()}
-              />
+              <div className="mb-4">
+                <div className="relative">
+                  <input
+                    type="password"
+                    value={pinInput}
+                    onChange={(e) => {
+                      setPinInput(e.target.value);
+                      setPinError('');
+                    }}
+                    className="w-full px-4 py-3 bg-white/80 border border-gray-200 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent placeholder-gray-400"
+                    placeholder="Enter your PIN"
+                    onKeyDown={(e) => e.key === 'Enter' && handlePinSubmit()}
+                  />
+                  {pinError && (
+                    <motion.p 
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="text-red-500 text-sm mt-2 flex items-center"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                      </svg>
+                      {pinError}
+                    </motion.p>
+                  )}
+                </div>
+              </div>
               
-              {pinError && (
-                <p className="text-red-500 text-sm">{pinError}</p>
-              )}
-              
-              <div className="flex justify-end gap-3 mt-6">
+              <div className="flex flex-col sm:flex-row gap-3 mt-6">
                 <motion.button
                   onClick={() => {
                     setShowPinModal(false);
                     setPinInput('');
                     setPinError('');
                   }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="px-6 py-3 bg-white text-gray-700 rounded-xl shadow-sm hover:shadow-md transition-all font-medium flex-1"
                 >
                   Cancel
                 </motion.button>
                 <motion.button
                   onClick={handlePinSubmit}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-4 py-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-lg shadow hover:shadow-md transition"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="px-6 py-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white rounded-xl shadow-lg hover:shadow-xl transition-all font-medium flex-1"
                 >
-                  Submit
+                  Unlock Message
                 </motion.button>
               </div>
+              
+              <motion.div 
+                className="mt-6 text-center text-xs text-gray-500"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+              >
+                <p>Hint: It's something special to We both</p>
+              </motion.div>
             </motion.div>
           </motion.div>
         )}

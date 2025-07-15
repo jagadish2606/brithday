@@ -284,7 +284,7 @@ const BirthdayWish = () => {
 
           {/* Right-aligned buttons */}
           <div className="flex gap-3 justify-center sm:justify-end w-full sm:w-auto">
-            {/* <motion.button 
+            <motion.button 
               whileHover={{ scale: 1.1 }} 
               whileTap={{ scale: 0.9 }} 
               className={`p-3 rounded-full shadow-lg flex items-center justify-center ${isPlaying ? 'bg-gradient-to-r from-pink-600 to-purple-600' : 'bg-gradient-to-r from-pink-500 to-purple-500'} text-white`}
@@ -299,9 +299,19 @@ const BirthdayWish = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15.536a5 5 0 001.414 1.414m2.828-9.9a9 9 0 012.728-2.728" />
                 </svg>
               )}
-            </motion.button> */}
+            </motion.button>
 
-            
+            <Link to="/members">
+              <motion.button 
+                whileHover={{ scale: 1.1 }} 
+                whileTap={{ scale: 0.9 }} 
+                className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-3 rounded-full shadow-lg flex items-center justify-center"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v1h8v-1zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-1a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v1h-3zM4.75 12.094A5.973 5.973 0 004 15v1H1v-1a3 3 0 013.75-2.906z" />
+                </svg>
+              </motion.button>
+            </Link>
           </div>
         </div>
 
@@ -333,46 +343,40 @@ const BirthdayWish = () => {
               ❤️ {showHearts ? 'Hide Hearts' : 'Show Hearts!'}
             </div>
           </motion.div>
-          <Link to="/members">
-              <motion.button 
-                whileHover={{ scale: 1.1 }} 
-                whileTap={{ scale: 0.9 }} 
-                className="bg-gradient-to-r from-purple-500 to-pink-500 text-white p-3 rounded-full shadow-lg flex items-center justify-center"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v1h8v-1zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-1a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v1h-3zM4.75 12.094A5.973 5.973 0 004 15v1H1v-1a3 3 0 013.75-2.906z" />
-                </svg>
-              </motion.button>
-            </Link>
         </div>
       </motion.div>
 
-      {/* Birthday Photo Grid */}
+      {/* Birthday Photo Grid - Updated for better alignment */}
       <motion.div 
         variants={container} 
         initial="hidden" 
         animate="show" 
-        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 px-4 sm:px-6 w-full"
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 px-4 sm:px-6 w-full max-w-6xl mx-auto"
       >
         {photoCards.map((card) => (
           <motion.div 
             key={card.id} 
             variants={item} 
-            className="bg-white rounded-xl sm:rounded-2xl shadow-md sm:shadow-xl overflow-hidden hover:shadow-lg sm:hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 sm:hover:-translate-y-2 group h-full flex flex-col"
+            className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 flex flex-col h-full"
             whileHover={{ scale: 1.02 }}
           >
-            <div className="h-48 sm:h-64 overflow-hidden relative">
-              <img src={card.imageUrl} alt={card.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4 sm:p-6">
-                <h3 className="text-white font-bold text-lg sm:text-xl mb-1 sm:mb-2">{card.title}</h3>
-                <p className="text-white/90 font-medium text-sm sm:text-base">{card.slogan}</p>
+            {/* Image Container with Fixed Aspect Ratio (4:3) */}
+            <div className="relative pt-[75%] overflow-hidden">
+              <img 
+                src={card.imageUrl} 
+                alt={card.title} 
+                className="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                <h3 className="text-white font-bold text-xl mb-1">{card.title}</h3>
+                <p className="text-white/90 font-medium">{card.slogan}</p>
               </div>
             </div>
-            <div className="p-4 sm:p-6 flex-grow flex flex-col">
-              <div className="mb-3 sm:mb-4 flex-grow">
-                <h3 className="font-bold text-lg sm:text-xl text-gray-800 mb-1 sm:mb-2">{card.slogan}</h3>
-                <p className="text-gray-600 whitespace-pre-line text-sm sm:text-base">{card.poem}</p>
-              </div>
+            
+            {/* Card Content */}
+            <div className="p-6 flex-grow flex flex-col">
+              <h3 className="font-bold text-xl text-gray-800 mb-3">{card.slogan}</h3>
+              <p className="text-gray-600 whitespace-pre-line mb-4 flex-grow">{card.poem}</p>
             </div>
           </motion.div>
         ))}
@@ -383,9 +387,9 @@ const BirthdayWish = () => {
         initial={{ opacity: 0, y: 20 }} 
         animate={{ opacity: 1, y: 0 }} 
         transition={{ delay: 0.7 }} 
-        className="mt-8 sm:mt-16 mb-6 sm:mb-8 px-4 sm:px-6"
+        className="mt-12 mb-8 px-4 sm:px-6"
       >
-        <div className="bg-gradient-to-r from-pink-100 via-purple-100 to-yellow-100 p-4 sm:p-8 rounded-xl sm:rounded-3xl shadow-inner text-center">
+        <div className="bg-gradient-to-r from-pink-100 via-purple-100 to-yellow-100 p-8 rounded-2xl shadow-inner text-center max-w-4xl mx-auto">
           <motion.div 
             animate={{ rotate: [-5, 5, -5] }} 
             transition={{
@@ -394,25 +398,25 @@ const BirthdayWish = () => {
               repeatType: 'reverse',
               ease: 'easeInOut'
             }} 
-            className="inline-block mb-2 sm:mb-4"
+            className="inline-block mb-4"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-10 sm:h-16 w-10 sm:w-16 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
               <path fillRule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.38z" clipRule="evenodd" />
             </svg>
           </motion.div>
-          <h3 className="text-xl sm:text-3xl font-bold text-gray-800 mb-3 sm:mb-6">A Special Message For You 💌</h3>
-          <div className="max-w-4xl mx-auto px-4">
-            <p className="text-sm sm:text-lg text-gray-700 mb-2 sm:mb-4">
+          <h3 className="text-3xl font-bold text-gray-800 mb-6">A Special Message For You 💌</h3>
+          <div className="px-4">
+            <p className="text-lg text-gray-700 mb-4">
               On your special day, we want you to know how much you mean to us. Your kindness, laughter, and beautiful spirit make the world a better place. ✨
             </p>
-            <p className="text-sm sm:text-lg text-gray-700 mb-4 sm:mb-6">
+            <p className="text-lg text-gray-700 mb-6">
               May this year bring you endless joy, success in all your endeavors, and dreams that turn into reality. You deserve all the happiness in the world! 🌈
             </p>
-            <div className="flex justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-4">
               <motion.div 
                 whileHover={{ scale: 1.05 }} 
                 whileTap={{ scale: 0.95 }} 
-                className="inline-block bg-gradient-to-r from-pink-400 to-purple-400 text-white px-4 sm:px-8 py-2 sm:py-3 rounded-full shadow-lg text-sm sm:text-lg font-medium"
+                className="bg-gradient-to-r from-pink-400 to-purple-400 text-white px-8 py-3 rounded-full shadow-lg text-lg font-medium"
                 onClick={() => setShowConfetti(true)}
               >
                 🎂 Make A Wish!
@@ -420,7 +424,7 @@ const BirthdayWish = () => {
               <motion.div 
                 whileHover={{ scale: 1.05 }} 
                 whileTap={{ scale: 0.95 }} 
-                className="inline-block bg-gradient-to-r from-red-400 to-pink-400 text-white px-4 sm:px-8 py-2 sm:py-3 rounded-full shadow-lg text-sm sm:text-lg font-medium"
+                className="bg-gradient-to-r from-red-400 to-pink-400 text-white px-8 py-3 rounded-full shadow-lg text-lg font-medium"
                 onClick={() => setShowHearts(true)}
               >
                 💖 Send Love!
@@ -435,20 +439,20 @@ const BirthdayWish = () => {
         initial={{ opacity: 0 }} 
         animate={{ opacity: 1 }} 
         transition={{ delay: 1 }} 
-        className="text-center py-4 sm:py-8 px-4 sm:px-6"
+        className="text-center py-8 px-4 sm:px-6"
       >
-        <h4 className="text-lg sm:text-xl font-semibold text-gray-700 mb-3 sm:mb-4">The Celebration Continues... 🎊</h4>
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-4">
+        <h4 className="text-xl font-semibold text-gray-700 mb-4">The Celebration Continues... 🎊</h4>
+        <div className="flex flex-wrap justify-center gap-4">
           {['Days', 'Hours', 'Minutes', 'Seconds'].map((unit) => (
             <motion.div 
               key={unit} 
               whileHover={{ scale: 1.1 }} 
-              className="bg-white p-2 sm:p-4 rounded-lg sm:rounded-xl shadow-sm sm:shadow-md w-16 sm:w-24"
+              className="bg-white p-4 rounded-xl shadow-md w-24"
             >
-              <div className="text-xl sm:text-3xl font-bold text-pink-500 mb-1">
+              <div className="text-3xl font-bold text-pink-500 mb-1">
                 {timeLeft[unit.toLowerCase()]}
               </div>
-              <div className="text-xs sm:text-sm text-gray-600">{unit}</div>
+              <div className="text-sm text-gray-600">{unit}</div>
             </motion.div>
           ))}
         </div>

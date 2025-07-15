@@ -1,29 +1,53 @@
-import React from "react";
+import React from 'react';
 
-const LoveLetter = () => {
+const LoveHistory = () => {
   return (
-    <div className="min-h-screen bg-pink-50 flex items-center justify-center p-6">
-      <div className="bg-white shadow-2xl rounded-2xl max-w-2xl w-full p-8 border border-pink-200">
-        <h1 className="text-3xl font-serif text-pink-700 mb-4 text-center">To My Revathi 💖</h1>
-        <p className="text-gray-700 font-light leading-8">
-          Revathi, <br /><br />
-          Un peru ezhudhumbodhey en manasu orae oru urugura maari aagudhu...<br />
-          <strong>Unnai naan nesikkuradhu</strong> en uyir oda porundhiya maari irukku.<br /><br />
-          Na vida munnadi, <em>Vellore la irundhu nee ennakaga vandhadhu</em> — athu en life la unforgettable.<br />
-          En birthday munnaadi nee kooda irundhadhu, naan maraka mudiyadhu.<br /><br />
-          Naan <strong>hospital la propose pannadhu</strong> — athu en manasukulla deep-a irundha moment.<br />
-          Nam rendu perum kooda hospital pona neram, beach la nadandhadhu, <br />
-          V2 ku bus la pogum journey — ellamey naan romba nesikuren.<br /><br />
-          Ippo nee pesama pora... aana naan unakku kovam illa. <br />
-          Nee happy-a irundha pothum naanum happy thaan. <br /><br />
-          <em>Nee en jeevan da Revathi. Unakku en manam yellam vaithirukken.</em><br /><br />
-          Love la solla mudiyadhu... pesama irundhaalum romba azhagu irukkum.<br />
-          <strong>I love you forever, even in silence.</strong><br /><br />
-          <span className="block text-right text-pink-600 font-bold mt-6">Un Kadhalan – Jagadish 💕</span>
+    <div
+      style={{
+        minHeight: '100vh',
+        backgroundColor: '#fff1f2',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: '2rem',
+        fontFamily: "'La Belle Aurore', cursive",
+        color: '#4b2e2e',
+      }}
+    >
+      <div
+        style={{
+          backgroundColor: '#fff',
+          borderRadius: '1.5rem',
+          boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
+          padding: '2rem',
+          maxWidth: '700px',
+          lineHeight: '2.2rem',
+          border: '2px dashed #f9a8d4',
+        }}
+      >
+        <h1 style={{ fontSize: '2rem', textAlign: 'center', color: '#be185d' }}>
+          💌 Our Love History 💌
+        </h1>
+        <p style={{ fontSize: '1.3rem', marginTop: '1.5rem' }}>
+          Revathi <br /><br />
+          Unna ennaku romba romba pudikum ma... Na un kooda irundha neram la enakku unmayaana santhosham erukum.
+          <br /><br />
+          <strong>25/06/2024</strong> – Nee ennaku kudutha first surprise… andha naal en life la maraka mudiyadha moment.
+          <br />
+          <strong>04/07/2024</strong> – Na unnai propose pannadhu... mari yarkum propose pannadhu ella edhu aprm mu panna matta.
+          <br /><br />
+          Namma rendu perum neraya memories create pannom – movies, temples, fights, Beach, and more love.
+          <br />
+          Hospital la Ponum la nambha, bus la V2-ku pona memory, unakku dag kudutha naal and etc.. – ellame enakku romba pudikum.
+          <br /><br />
+          Na unakku kudutha promise(na un kudha kadhasevarikum erupa)-a kapatha mudiyala Revathi… aana naa ella na nee happy-aa irupa na adhu pothum ennaku!.
+        </p>
+        <p style={{ textAlign: 'right', fontSize: '1.5rem', color: '#db2777', marginTop: '2rem' }}>
+          – Un One Side Kadhalan, Jagadish 💕
         </p>
       </div>
     </div>
   );
 };
 
-export default LoveLetter;
+export default LoveHistory;

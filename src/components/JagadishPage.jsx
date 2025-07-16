@@ -8,6 +8,8 @@ const LoveHistory = () => {
   const [showMusicModal, setShowMusicModal] = useState(false);
   const [showSongTitle, setShowSongTitle] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [activeCard, setActiveCard] = useState(0);
+  const containerRef = useRef(null);
   const audioRef = useRef(null);
 
   const songs = [
@@ -25,23 +27,51 @@ const LoveHistory = () => {
     },
   ];
 
-  // Check for mobile view
+  // Check for mobile view and handle scroll
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (!mobile) setActiveCard(0);
     };
     
-    handleResize(); // Check on initial load
+    const handleScroll = () => {
+      if (!isMobile || !containerRef.current) return;
+      
+      const container = containerRef.current;
+      const scrollPosition = container.scrollTop + container.clientHeight / 2;
+      const cards = Array.from(container.children);
+      
+      cards.forEach((card, index) => {
+        const cardTop = card.offsetTop;
+        const cardHeight = card.clientHeight;
+        
+        if (scrollPosition > cardTop && scrollPosition < cardTop + cardHeight) {
+          setActiveCard(index);
+        }
+      });
+    };
+
+    handleResize();
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    
+    if (containerRef.current) {
+      containerRef.current.addEventListener('scroll', handleScroll);
+    }
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      if (containerRef.current) {
+        containerRef.current.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, [isMobile]);
 
   const playSong = (song) => {
     setCurrentSong(song);
     setIsPlaying(true);
     setShowSongTitle(true);
     
-    // Hide song title after 3 seconds
     setTimeout(() => {
       setShowSongTitle(false);
     }, 3000);
@@ -89,17 +119,34 @@ const LoveHistory = () => {
     }
   }, []);
 
+  // Scroll to active card on mobile
+  useEffect(() => {
+    if (isMobile && containerRef.current) {
+      const container = containerRef.current;
+      const activeElement = container.children[activeCard];
+      if (activeElement) {
+        container.scrollTo({
+          top: activeElement.offsetTop - 20,
+          behavior: 'smooth'
+        });
+      }
+    }
+  }, [activeCard, isMobile]);
+
   return (
     <div
       style={{
         minHeight: '100vh',
         backgroundColor: '#fff1f2',
-        padding: isMobile ? '1rem' : '2rem',
+        padding: isMobile ? '0' : '2rem',
         fontFamily: "'La Belle Aurore', cursive",
         color: '#4b2e2e',
+        overflow: isMobile ? 'hidden' : 'visible',
+        width: '100vw',        // Add this line (equivalent to w-screen)
+        overflowX: 'hidden', 
       }}
     >
-      {/* Floating Music Player with song title display */}
+      {/* Floating Music Player with enhanced tooltip */}
       <div
         style={{
           position: 'fixed',
@@ -131,6 +178,7 @@ const LoveHistory = () => {
         
         <div
           style={{
+            position: 'relative',
             backgroundColor: '#ff85a2',
             borderRadius: '50%',
             width: isMobile ? '50px' : '60px',
@@ -140,14 +188,51 @@ const LoveHistory = () => {
             alignItems: 'center',
             boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
             cursor: 'pointer',
-            transition: 'transform 0.3s',
+            transition: 'all 0.3s',
             ':hover': {
-              transform: 'scale(1.1)'
+              transform: 'scale(1.1)',
+              backgroundColor: '#ff6b8b'
             }
           }}
           onClick={handleMusicIconClick}
+          onMouseEnter={() => setShowSongTitle(true)}
+          onMouseLeave={() => setTimeout(() => setShowSongTitle(false), 1000)}
         >
           <span style={{ fontSize: isMobile ? '20px' : '24px' }}>🎵</span>
+          
+          {/* Enhanced Tooltip */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '100%',
+              right: '50%',
+              transform: 'translateX(50%)',
+              backgroundColor: 'rgba(0,0,0,0.8)',
+              color: 'white',
+              padding: '8px 12px',
+              borderRadius: '8px',
+              fontSize: '14px',
+              whiteSpace: 'nowrap',
+              marginBottom: '12px',
+              opacity: showSongTitle ? 1 : 0,
+              visibility: showSongTitle ? 'visible' : 'hidden',
+              transition: 'all 0.3s ease',
+              pointerEvents: 'none',
+              zIndex: 101,
+              '::after': {
+                content: '""',
+                position: 'absolute',
+                top: '100%',
+                left: '50%',
+                marginLeft: '-5px',
+                borderWidth: '5px',
+                borderStyle: 'solid',
+                borderColor: 'rgba(0,0,0,0.8) transparent transparent transparent'
+              }
+            }}
+          >
+            {currentSong ? 'Change background music' : 'Set background music'}
+          </div>
         </div>
       </div>
 
@@ -261,29 +346,65 @@ const LoveHistory = () => {
         style={{ display: 'none' }}
       />
 
-      {/* Grid Layout - Responsive */}
+      {/* Mobile Navigation Dots */}
+      {isMobile && (
+        <div style={{
+          position: 'fixed',
+          bottom: '80px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          display: 'flex',
+          gap: '10px',
+          zIndex: 99,
+        }}>
+          {[0, 1, 2, 3].map((index) => (
+            <div
+              key={index}
+              style={{
+                width: '12px',
+                height: '12px',
+                borderRadius: '50%',
+                backgroundColor: activeCard === index ? '#db2777' : '#ffb6c1',
+                cursor: 'pointer',
+                transition: 'all 0.3s',
+              }}
+              onClick={() => setActiveCard(index)}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Main Content Container */}
       <div
+        ref={containerRef}
         style={{
-          display: 'grid',
+          display: isMobile ? 'block' : 'grid',
           gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: isMobile ? '1.5rem' : '2rem',
+          gap: isMobile ? '0' : '2rem',
           maxWidth: '1200px',
           margin: '0 auto',
+          height: isMobile ? '100vh' : 'auto',
+          overflowY: isMobile ? 'scroll' : 'visible',
+          scrollSnapType: isMobile ? 'y mandatory' : 'none',
+          scrollBehavior: 'smooth',
+          padding: isMobile ? '0' : 'inherit',
         }}
       >
         {/* Images Card */}
         <div
           style={{
             backgroundColor: '#fff',
-            borderRadius: '1.5rem',
-            boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
-            padding: isMobile ? '1.5rem' : '2rem',
+            borderRadius: isMobile ? '0' : '1.5rem',
+            boxShadow: isMobile ? 'none' : '0 10px 25px rgba(0,0,0,0.1)',
+            padding: isMobile ? '2rem 1.5rem' : '2rem',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            border: '2px dashed #f9a8d4',
+            border: isMobile ? 'none' : '2px dashed #f9a8d4',
             background: 'linear-gradient(135deg, #fff9fb 0%, #fff5f7 100%)',
-            order: isMobile ? 1 : 0,
+            height: isMobile ? '100vh' : 'auto',
+            scrollSnapAlign: isMobile ? 'start' : 'none',
+            position: 'relative',
           }}
         >
           <h1 style={{ 
@@ -477,19 +598,32 @@ const LoveHistory = () => {
           }}>
             Each picture holds a thousand memories of our love story
           </p>
+          
+          {isMobile && (
+            <div style={{
+              position: 'absolute',
+              bottom: '20px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              animation: 'bounce 2s infinite'
+            }}>
+              <span style={{ fontSize: '2rem' }}>👇</span>
+            </div>
+          )}
         </div>
 
         {/* Love History Card */}
         <div
           style={{
             backgroundColor: '#fff',
-            borderRadius: '1.5rem',
-            boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
-            padding: isMobile ? '1.5rem' : '2rem',
+            borderRadius: isMobile ? '0' : '1.5rem',
+            boxShadow: isMobile ? 'none' : '0 10px 25px rgba(0,0,0,0.1)',
+            padding: isMobile ? '2rem 1.5rem' : '2rem',
             lineHeight: '2.2rem',
-            border: '2px dashed #f9a8d4',
+            border: isMobile ? 'none' : '2px dashed #f9a8d4',
             background: 'linear-gradient(135deg, #fff9fb 0%, #fff5f7 100%)',
-            order: isMobile ? 2 : 0,
+            height: isMobile ? '100vh' : 'auto',
+            scrollSnapAlign: isMobile ? 'start' : 'none',
           }}
         >
           <h1 style={{ 
@@ -531,14 +665,16 @@ const LoveHistory = () => {
         <div
           style={{
             backgroundColor: '#fff',
-            borderRadius: '1.5rem',
-            boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
-            padding: isMobile ? '1.5rem' : '2rem',
+            borderRadius: isMobile ? '0' : '1.5rem',
+            boxShadow: isMobile ? 'none' : '0 10px 25px rgba(0,0,0,0.1)',
+            padding: isMobile ? '2rem 1.5rem' : '2rem',
             display: 'flex',
             flexDirection: 'column',
-            border: '2px dashed #f9a8d4',
+            border: isMobile ? 'none' : '2px dashed #f9a8d4',
             background: 'linear-gradient(135deg, #fff9fb 0%, #fff5f7 100%)',
-            order: isMobile ? 3 : 0,
+            height: isMobile ? '100vh' : 'auto',
+            scrollSnapAlign: isMobile ? 'start' : 'none',
+            justifyContent: 'center',
           }}
         >
           <h1 style={{ 
@@ -574,14 +710,16 @@ const LoveHistory = () => {
         <div
           style={{
             backgroundColor: '#fff',
-            borderRadius: '1.5rem',
-            boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
-            padding: isMobile ? '1.5rem' : '2rem',
+            borderRadius: isMobile ? '0' : '1.5rem',
+            boxShadow: isMobile ? 'none' : '0 10px 25px rgba(0,0,0,0.1)',
+            padding: isMobile ? '2rem 1.5rem' : '2rem',
             display: 'flex',
             flexDirection: 'column',
-            border: '2px dashed #f9a8d4',
+            border: isMobile ? 'none' : '2px dashed #f9a8d4',
             background: 'linear-gradient(135deg, #fff9fb 0%, #fff5f7 100%)',
-            order: isMobile ? 4 : 0,
+            height: isMobile ? '100vh' : 'auto',
+            scrollSnapAlign: isMobile ? 'start' : 'none',
+            justifyContent: 'center',
           }}
         >
           <h1 style={{ 
@@ -604,8 +742,8 @@ const LoveHistory = () => {
             With you is where I'm strong. <br /><br />
             Through every up and every down, <br />
             My love for you will never drown.<br />
-            I will never for got our memories 
-          I don't know what destiny have planned for us.... but I know one thing I can't unlove You and You will always have my heart...
+            I will never forget our memories.
+            I don't know what destiny has planned for us.... but I know one thing I can't unlove You and You will always have my heart...
           </p>
           <div style={{ 
             textAlign: 'center', 
@@ -635,6 +773,17 @@ const LoveHistory = () => {
           @keyframes fadeIn {
             from { opacity: 0; transform: translateX(20px); }
             to { opacity: 1; transform: translateX(0); }
+          }
+          @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+          }
+          
+          /* Custom scrollbar for mobile */
+          ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
           }
         `}
       </style>

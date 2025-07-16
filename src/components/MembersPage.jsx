@@ -45,18 +45,19 @@ const MembersPage = () => {
       funFact: 'All the time and place where we all together is the most funniest one..I love to be with u always gurl... Anywhere with u sounds like hahahahaha!'
     },
     {
-      id: 6,
-      name: 'Tharun',
-      email: 'tharun@example.com',
-      role: 'Best Friend',
-      profileImg: './images/members/tharun.jpg',
-      Img: './images/members/tharunAndReva.jpg',
-      bio: 'She is a very caring person,she made me more mature and the only person who stood up with me for the past 7 years',
-      wishes: [
-       "Everything will be alright soon, hold ur smile and always be happy"
-      ],
-      funFact: "Food can change her mood in seconds it's her superpower."
-    },
+  id: 6,
+  name: 'Tharun',
+  email: 'tharun@example.com',
+  role: 'Best Friend & Birthday Buddy',
+  profileImg: './images/members/tharun.jpg',
+  Img: './images/members/tharunAndReva.jpg',
+  bio: 'She is a very caring person, she made me more mature and the only person who stood up with me for the past 7 years. Today we celebrate both of our birthdays together! 🎉',
+  wishes: [
+    "Happy birthday to us both! May this year bring us double the happiness and success. Everything will be alright soon, hold your smile and always be happy"
+  ],
+  funFact: "Not only does food change her mood in seconds (it's her superpower), but we also share the same birthday date! What are the odds?",
+  isBirthdayBuddy: true // Add this flag
+},
     {
       id: 7,
       name: 'Divya',
@@ -89,7 +90,7 @@ const MembersPage = () => {
       email: '',
       role: 'Best Friend',
       profileImg: './images/members/MK.jpg',
-      Img: './images/members/dineshAndReva.jpg',
+      Img: './images/members/MK.jpg',
       bio: "Happiest birthday reva! Hope you are doing good Someone said it right that school friends never change❤such a beautiful soul you are ....love you so much da Friendship is the only cement that will ever hold the world together",
       wishes: [
         'Unaku sollanum na Life is short uh machi have fun😅',
@@ -460,6 +461,7 @@ const MembersPage = () => {
               </div>
             </div>
           </motion.div>
+          
         </div>
       </div>
 

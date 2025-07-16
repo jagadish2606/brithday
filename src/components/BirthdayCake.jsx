@@ -67,11 +67,13 @@ const BirthdayFlashPage = () => {
         </div>
       ) : (
         <div style={styles.content}>
-          <img 
-            src={birthdayGif} 
-            alt="Happy Birthday" 
-            style={styles.gif}
-          />
+          <div style={styles.imageContainer}>
+            <img 
+              src={birthdayGif} 
+              alt="Happy Birthday" 
+              style={styles.gif}
+            />
+          </div>
           <h1 style={styles.text}>Happy Birthday!</h1>
           <p style={styles.subtext}>Welcome to your special day!</p>
         </div>
@@ -93,9 +95,22 @@ const styles = {
     position: 'relative',
   },
   content: {
-    textAlign: 'center',
-    maxWidth: '90%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    height: '100%',
     zIndex: 1,
+    padding: '20px',
+    boxSizing: 'border-box',
+  },
+  imageContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    marginBottom: '20px',
   },
   gif: {
     width: '300px',
@@ -106,19 +121,21 @@ const styles = {
     border: '8px solid white',
   },
   text: {
-    marginTop: '30px',
+    marginTop: '20px',
     color: '#e91e63',
     fontSize: '3.5rem',
     fontFamily: '"Dancing Script", cursive, sans-serif',
     textShadow: '3px 3px 6px rgba(0, 0, 0, 0.3)',
     fontWeight: '700',
+    textAlign: 'center',
   },
   subtext: {
     color: '#ad1457',
     fontSize: '1.8rem',
     fontFamily: '"Dancing Script", cursive, sans-serif',
-    marginTop: '20px',
+    marginTop: '10px',
     fontWeight: '600',
+    textAlign: 'center',
   },
   overlay: {
     textAlign: 'center',

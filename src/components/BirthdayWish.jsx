@@ -59,30 +59,31 @@ const BirthdayWish = () => {
       id: 1,
       title: 'Beautiful Smile',
       imageUrl: './images/reva@3.jpg',
-      slogan: 'Your smile brightens every day',
-      poem: 'A smile so pure, a heart so true,\nLike morning sun and sparkling dew.\nMay happiness follow wherever you go,\nAnd your inner light forever glow.'
+      slogan: 'உன் சிரிப்பை மீண்டும் காண, சூரியனும் வானும் கூட காத்திருக்கின்றன!',
+      poem: 'சின்ன வயதில் சிரிப்பு எனும் மழைதூவல், நெஞ்சை நனைக்கும் நறுமண பூக்கள். அந்த முகத்தில் இருக்கும் மகிழ்ச்சி.'
     },
-    {
+        {
       id: 2,
-      title: 'Adventurous Spirit',
+      title: 'Whispers with Wings',
       imageUrl: './images/reva@1.jpg',
-      slogan: 'Life is an adventure with you',
-      poem: 'Through every path you boldly tread,\nWith courage strong and dreams widespread.\nMay your journey be wild and free,\nFilled with joy and destiny.'
+      slogan: 'Even the wild trusts your gentle hand',
+      poem: 'A bird so still upon your palm,\nNature itself feels soft and calm.\nNo words were needed, only grace,\nTo make the skies your resting place.'
     },
-    {
+
+   {
       id: 3,
-      title: 'Kind Heart',
+      title: 'Soul of Tradition',
       imageUrl: './images/reva@4.jpg',
-      slogan: 'Your kindness touches every soul',
-      poem: 'A heart so warm, so kind, so bright,\nShining like stars in darkest night.\nYour gentle ways, your caring touch,\nMean more to us than words can clutch.'
+      slogan: 'Grace in every step, kindness in every smile',
+      poem: 'Draped in culture, wrapped in light,\nYou turn the world so soft, so bright.\nWith every gesture calm and kind,\nYou leave a golden trail behind.'
     },
-    {
-      id: 4,
-      title: 'Creative Soul',
-      imageUrl: './images/reva@5.jpg',
-      slogan: 'Your creativity inspires us all',
-      poem: 'With colors bold and visions clear,\nYou paint the world we hold so dear.\nMay inspiration always flow,\nAnd your artistic spirit grow.'
-    },
+   {
+  id: 4,
+  title: 'Flair in Every Frame',
+  imageUrl: './images/reva@5.jpg',
+  slogan: 'Your style speaks louder than words',
+  poem: 'Grace in your glance, boldness in your stance,\nEvery pose, a dance of chance.\nYou turn moments into living art,\nA masterpiece straight from the heart.'
+},
     {
       id: 5,
       title: 'Loving Friend',
@@ -361,7 +362,7 @@ const BirthdayWish = () => {
             
             {/* Card Content */}
             <div className="p-6 flex-grow flex flex-col">
-              <h3 className="font-bold text-xl text-gray-800 mb-3">{card.slogan}</h3>
+              {/* <h3 className="font-bold text-xl text-gray-800 mb-3">{card.slogan}</h3> */}
               <p className="text-gray-600 whitespace-pre-line mb-4 flex-grow">{card.poem}</p>
             </div>
           </motion.div>

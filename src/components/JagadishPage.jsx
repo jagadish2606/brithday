@@ -9,6 +9,7 @@ const LoveHistory = () => {
   const [showSongTitle, setShowSongTitle] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [activeCard, setActiveCard] = useState(0);
+  const [pulse, setPulse] = useState(false);
   const containerRef = useRef(null);
   const audioRef = useRef(null);
 
@@ -17,13 +18,19 @@ const LoveHistory = () => {
       id: 1,
       title: "Emotional Song",
       url: emotional,
-      type: "feelings"
+      type: "feelings",
+      color: "#9d4edd",
+      emoji: "🥲",
+      bgGradient: "linear-gradient(135deg, #e0aaff 0%, #c77dff 100%)"
     },
     {
       id: 2,
       title: "Love Song",
       url: loveSong,
-      type: "love"
+      type: "love",
+      color: "#ff5d8f",
+      emoji: "💖",
+      bgGradient: "linear-gradient(135deg, #ffccd5 0%, #ff8fab 100%)"
     },
   ];
 
@@ -71,9 +78,11 @@ const LoveHistory = () => {
     setCurrentSong(song);
     setIsPlaying(true);
     setShowSongTitle(true);
+    setPulse(true);
     
     setTimeout(() => {
       setShowSongTitle(false);
+      setPulse(false);
     }, 3000);
 
     if (audioRef.current) {
@@ -92,7 +101,11 @@ const LoveHistory = () => {
     }
     setIsPlaying(!isPlaying);
     setShowSongTitle(true);
-    setTimeout(() => setShowSongTitle(false), 3000);
+    setPulse(true);
+    setTimeout(() => {
+      setShowSongTitle(false);
+      setPulse(false);
+    }, 3000);
   };
 
   const stopSong = () => {
@@ -107,6 +120,13 @@ const LoveHistory = () => {
 
   const handleMusicIconClick = () => {
     setShowMusicModal(!showMusicModal);
+    setShowSongTitle(true);
+    setPulse(true);
+    setTimeout(() => {
+      setShowSongTitle(false);
+      setPulse(false);
+    }, 3000);
+    
     if (!currentSong && !showMusicModal) {
       playSong(songs[0]);
     }
@@ -142,11 +162,11 @@ const LoveHistory = () => {
         fontFamily: "'La Belle Aurore', cursive",
         color: '#4b2e2e',
         overflow: isMobile ? 'hidden' : 'visible',
-        width: '100vw',        // Add this line (equivalent to w-screen)
-        overflowX: 'hidden', 
+        width: '100vw',
+        overflowX: 'hidden',
       }}
     >
-      {/* Floating Music Player with enhanced tooltip */}
+      {/* Enhanced Floating Music Player */}
       <div
         style={{
           position: 'fixed',
@@ -166,32 +186,39 @@ const LoveHistory = () => {
               borderRadius: '20px',
               boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
               fontSize: isMobile ? '12px' : '14px',
-              color: '#db2777',
+              color: currentSong?.color || '#db2777',
               fontWeight: 'bold',
               animation: 'fadeIn 0.5s',
               maxWidth: isMobile ? '150px' : 'none',
+              border: `2px solid ${currentSong?.color || '#db2777'}`,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
             }}
           >
-            Now Playing: {currentSong.title}
+            <span style={{ fontSize: '1.2rem' }}>{currentSong.emoji}</span>
+            <span>Now Playing: {currentSong.title}</span>
           </div>
         )}
         
         <div
           style={{
             position: 'relative',
-            backgroundColor: '#ff85a2',
+            backgroundColor: currentSong?.color || '#ff85a2',
             borderRadius: '50%',
             width: isMobile ? '50px' : '60px',
             height: isMobile ? '50px' : '60px',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+            boxShadow: `0 4px 15px ${currentSong ? `${currentSong.color}80` : 'rgba(0,0,0,0.2)'}`,
             cursor: 'pointer',
             transition: 'all 0.3s',
+            transform: pulse ? 'scale(1.1)' : 'scale(1)',
+            animation: pulse ? 'pulse 0.5s' : 'none',
             ':hover': {
               transform: 'scale(1.1)',
-              backgroundColor: '#ff6b8b'
+              backgroundColor: currentSong ? `${currentSong.color}e6` : '#ff6b8b'
             }
           }}
           onClick={handleMusicIconClick}
@@ -200,43 +227,33 @@ const LoveHistory = () => {
         >
           <span style={{ fontSize: isMobile ? '20px' : '24px' }}>🎵</span>
           
-          {/* Enhanced Tooltip */}
-          <div
-            style={{
-              position: 'absolute',
-              bottom: '100%',
-              right: '50%',
-              transform: 'translateX(50%)',
-              backgroundColor: 'rgba(0,0,0,0.8)',
-              color: 'white',
-              padding: '8px 12px',
-              borderRadius: '8px',
-              fontSize: '14px',
-              whiteSpace: 'nowrap',
-              marginBottom: '12px',
-              opacity: showSongTitle ? 1 : 0,
-              visibility: showSongTitle ? 'visible' : 'hidden',
-              transition: 'all 0.3s ease',
-              pointerEvents: 'none',
-              zIndex: 101,
-              '::after': {
-                content: '""',
+          {/* Music Note Animation when playing */}
+          {isPlaying && (
+            <>
+              <div style={{
                 position: 'absolute',
-                top: '100%',
-                left: '50%',
-                marginLeft: '-5px',
-                borderWidth: '5px',
-                borderStyle: 'solid',
-                borderColor: 'rgba(0,0,0,0.8) transparent transparent transparent'
-              }
-            }}
-          >
-            {currentSong ? 'Change background music' : 'Set background music'}
-          </div>
+                top: '-15px',
+                right: '-10px',
+                fontSize: '14px',
+                animation: 'float 2s infinite ease-in-out'
+              }}>
+                ♫
+              </div>
+              <div style={{
+                position: 'absolute',
+                top: '-20px',
+                right: '5px',
+                fontSize: '12px',
+                animation: 'float 2s infinite ease-in-out 0.5s'
+              }}>
+                ♪
+              </div>
+            </>
+          )}
         </div>
       </div>
 
-      {/* Music Modal */}
+      {/* Enhanced Music Modal */}
       {showMusicModal && (
         <div
           style={{
@@ -251,13 +268,38 @@ const LoveHistory = () => {
             width: isMobile ? '90%' : '250px',
             maxWidth: '300px',
             background: 'linear-gradient(135deg, #fff5f7 0%, #ffeef2 100%)',
-            border: '1px solid #ff85a2'
+            border: `2px solid ${currentSong?.color || '#ff85a2'}`,
+            animation: 'fadeInUp 0.3s'
           }}
         >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-            <h3 style={{ margin: 0, color: '#db2777', fontSize: isMobile ? '1.1rem' : '1.2rem' }}>Choose Song</h3>
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center', 
+            marginBottom: '10px',
+            borderBottom: `1px solid ${currentSong?.color || '#ff85a2'}`,
+            paddingBottom: '8px'
+          }}>
+            <h3 style={{ 
+              margin: 0, 
+              color: currentSong?.color || '#db2777', 
+              fontSize: isMobile ? '1.1rem' : '1.2rem',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px'
+            }}>
+              <span style={{ fontSize: '1.2rem' }}>🎧</span> Choose Background Music
+            </h3>
             <span 
-              style={{ cursor: 'pointer', fontSize: '20px', color: '#db2777' }}
+              style={{ 
+                cursor: 'pointer', 
+                fontSize: '20px', 
+                color: currentSong?.color || '#db2777',
+                transition: 'transform 0.2s',
+                ':hover': {
+                  transform: 'scale(1.2)'
+                }
+              }}
               onClick={() => setShowMusicModal(false)}
             >
               &times;
@@ -269,21 +311,35 @@ const LoveHistory = () => {
               <div 
                 key={song.id} 
                 style={{ 
-                  padding: '8px',
-                  margin: '5px 0',
+                  padding: '10px',
+                  margin: '8px 0',
                   cursor: 'pointer',
-                  backgroundColor: currentSong?.id === song.id ? '#fce7f3' : 'transparent',
+                  backgroundColor: currentSong?.id === song.id ? `${song.color}20` : 'transparent',
                   borderRadius: '8px',
-                  color: currentSong?.id === song.id ? '#db2777' : '#4b2e2e',
+                  color: currentSong?.id === song.id ? song.color : '#4b2e2e',
                   fontWeight: currentSong?.id === song.id ? 'bold' : 'normal',
                   transition: 'all 0.2s',
+                  borderLeft: `4px solid ${song.color}`,
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
                   ':hover': {
-                    backgroundColor: '#fce7f3'
+                    backgroundColor: `${song.color}20`,
+                    transform: 'translateX(5px)'
                   }
                 }}
                 onClick={() => playSong(song)}
               >
-                {song.title}
+                <span style={{ fontSize: '1.2rem' }}>{song.emoji}</span>
+                <div>
+                  <div>{song.title}</div>
+                  <div style={{
+                    fontSize: '0.7rem',
+                    color: currentSong?.id === song.id ? song.color : '#666'
+                  }}>
+                    {song.type}
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -294,30 +350,51 @@ const LoveHistory = () => {
               display: 'flex', 
               alignItems: 'center',
               justifyContent: 'space-between',
-              backgroundColor: '#fce7f3',
-              padding: '10px',
-              borderRadius: '8px'
+              backgroundColor: `${currentSong.color}10`,
+              padding: '12px',
+              borderRadius: '8px',
+              border: `1px solid ${currentSong.color}30`,
+              boxShadow: `0 2px 8px ${currentSong.color}20`
             }}>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                 <button 
                   onClick={togglePlay}
                   style={{
-                    backgroundColor: '#db2777',
+                    backgroundColor: currentSong.color,
                     color: 'white',
                     border: 'none',
                     borderRadius: '50%',
-                    width: '30px',
-                    height: '30px',
-                    marginRight: '10px',
+                    width: '36px',
+                    height: '36px',
                     cursor: 'pointer',
                     display: 'flex',
                     justifyContent: 'center',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    transition: 'all 0.2s',
+                    ':hover': {
+                      transform: 'scale(1.1)',
+                      boxShadow: `0 0 10px ${currentSong.color}80`
+                    }
                   }}
                 >
                   {isPlaying ? '❚❚' : '▶'}
                 </button>
-                <span style={{ fontSize: isMobile ? '0.8rem' : '0.9rem' }}>{currentSong.title}</span>
+                <div>
+                  <div style={{ 
+                    fontSize: isMobile ? '0.8rem' : '0.9rem',
+                    color: currentSong.color,
+                    fontWeight: 'bold'
+                  }}>
+                    {currentSong.title}
+                  </div>
+                  <div style={{
+                    fontSize: '0.7rem',
+                    color: currentSong.color,
+                    opacity: 0.8
+                  }}>
+                    {currentSong.type} • {isPlaying ? 'Playing' : 'Paused'}
+                  </div>
+                </div>
               </div>
               <button 
                 onClick={stopSong}
@@ -326,9 +403,14 @@ const LoveHistory = () => {
                   color: 'white',
                   border: 'none',
                   borderRadius: '4px',
-                  padding: '4px 8px',
+                  padding: '6px 10px',
                   cursor: 'pointer',
-                  fontSize: '0.8rem'
+                  fontSize: '0.8rem',
+                  transition: 'all 0.2s',
+                  ':hover': {
+                    transform: 'scale(1.05)',
+                    boxShadow: '0 0 10px rgba(255, 71, 87, 0.5)'
+                  }
                 }}
               >
                 Stop
@@ -356,6 +438,10 @@ const LoveHistory = () => {
           display: 'flex',
           gap: '10px',
           zIndex: 99,
+          backgroundColor: 'rgba(255, 255, 255, 0.7)',
+          padding: '8px 12px',
+          borderRadius: '20px',
+          boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
         }}>
           {[0, 1, 2, 3].map((index) => (
             <div
@@ -364,9 +450,12 @@ const LoveHistory = () => {
                 width: '12px',
                 height: '12px',
                 borderRadius: '50%',
-                backgroundColor: activeCard === index ? '#db2777' : '#ffb6c1',
+                backgroundColor: activeCard === index ? (currentSong?.color || '#db2777') : '#ffb6c1',
                 cursor: 'pointer',
                 transition: 'all 0.3s',
+                ':hover': {
+                  transform: 'scale(1.3)'
+                }
               }}
               onClick={() => setActiveCard(index)}
             />
@@ -388,6 +477,8 @@ const LoveHistory = () => {
           scrollSnapType: isMobile ? 'y mandatory' : 'none',
           scrollBehavior: 'smooth',
           padding: isMobile ? '0' : 'inherit',
+          width: '100vw',
+          overflowX: 'hidden',
         }}
       >
         {/* Images Card */}
@@ -774,10 +865,18 @@ const LoveHistory = () => {
             from { opacity: 0; transform: translateX(20px); }
             to { opacity: 1; transform: translateX(0); }
           }
+          @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
           @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
             40% { transform: translateY(-20px); }
             60% { transform: translateY(-10px); }
+          }
+          @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
           }
           
           /* Custom scrollbar for mobile */

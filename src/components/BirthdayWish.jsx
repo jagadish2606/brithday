@@ -284,22 +284,7 @@ const BirthdayWish = () => {
 
           {/* Right-aligned buttons */}
           <div className="flex gap-3 justify-center sm:justify-end w-full sm:w-auto">
-            <motion.button 
-              whileHover={{ scale: 1.1 }} 
-              whileTap={{ scale: 0.9 }} 
-              className={`p-3 rounded-full shadow-lg flex items-center justify-center ${isPlaying ? 'bg-gradient-to-r from-pink-600 to-purple-600' : 'bg-gradient-to-r from-pink-500 to-purple-500'} text-white`}
-              onClick={toggleAudio}
-            >
-              {isPlaying ? (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              ) : (
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15.536a5 5 0 001.414 1.414m2.828-9.9a9 9 0 012.728-2.728" />
-                </svg>
-              )}
-            </motion.button>
+            
 
             <Link to="/members">
               <motion.button 
@@ -407,7 +392,7 @@ const BirthdayWish = () => {
           <h3 className="text-3xl font-bold text-gray-800 mb-6">A Special Message For You 💌</h3>
           <div className="px-4">
             <p className="text-lg text-gray-700 mb-4">
-              On your special day, we want you to know how much you mean to us. Your kindness, laughter, and beautiful spirit make the world a better place. ✨
+              On your special day, I want you to know how much you mean to Me. Your kindness, laughter, and beautiful spirit make the world a better place. ✨
             </p>
             <p className="text-lg text-gray-700 mb-6">
               May this year bring you endless joy, success in all your endeavors, and dreams that turn into reality. You deserve all the happiness in the world! 🌈
@@ -443,18 +428,18 @@ const BirthdayWish = () => {
       >
         <h4 className="text-xl font-semibold text-gray-700 mb-4">The Celebration Continues... 🎊</h4>
         <div className="flex flex-wrap justify-center gap-4">
-          {['Days', 'Hours', 'Minutes', 'Seconds'].map((unit) => (
+          {/* {['Days', 'Hours', 'Minutes', 'Seconds'].map((unit) => (
             <motion.div 
               key={unit} 
               whileHover={{ scale: 1.1 }} 
               className="bg-white p-4 rounded-xl shadow-md w-24"
-            >
-              <div className="text-3xl font-bold text-pink-500 mb-1">
+            > */}
+              {/* <div className="text-3xl font-bold text-pink-500 mb-1">
                 {timeLeft[unit.toLowerCase()]}
-              </div>
-              <div className="text-sm text-gray-600">{unit}</div>
+              </div> */}
+              {/* <div className="text-sm text-gray-600">{unit}</div>
             </motion.div>
-          ))}
+          ))} */}
         </div>
       </motion.div>
 
@@ -477,7 +462,7 @@ const BirthdayWish = () => {
       </motion.div>
 
       {/* Audio Player Status */}
-      {isPlaying && (
+      {/* {isPlaying && (
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -488,7 +473,7 @@ const BirthdayWish = () => {
           </svg>
           Birthday Song Playing
         </motion.div>
-      )}
+      )} */}
     </div>
   );
 };

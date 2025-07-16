@@ -1,14 +1,13 @@
-import React, { useState, useRef } from 'react';
-// import reva1 from './images/members/durga.jpg';
-// import reva2 from './images/members/durga.jpg';
-// import reva3 from './images/members/durga.jpg';
+import React, { useState, useRef, useEffect } from 'react';
 import loveSong from '../assets/audio/my_song2.mp3';
-import emotional  from '../assets/audio/my_song.mp3';
+import emotional from '../assets/audio/my_song.mp3';
 
 const LoveHistory = () => {
   const [currentSong, setCurrentSong] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showMusicModal, setShowMusicModal] = useState(false);
+  const [showSongTitle, setShowSongTitle] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const audioRef = useRef(null);
 
   const songs = [
@@ -24,20 +23,35 @@ const LoveHistory = () => {
       url: loveSong,
       type: "love"
     },
-    // Add more songs as needed
   ];
+
+  // Check for mobile view
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    handleResize(); // Check on initial load
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const playSong = (song) => {
     setCurrentSong(song);
     setIsPlaying(true);
-    // When changing songs, we need to load the new source
+    setShowSongTitle(true);
+    
+    // Hide song title after 3 seconds
+    setTimeout(() => {
+      setShowSongTitle(false);
+    }, 3000);
+
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.src = song.url;
       audioRef.current.load();
       audioRef.current.play().catch(e => console.log("Audio play error:", e));
     }
-    togglePlay();
   };
 
   const togglePlay = () => {
@@ -47,6 +61,8 @@ const LoveHistory = () => {
       audioRef.current.play().catch(e => console.log("Audio play error:", e));
     }
     setIsPlaying(!isPlaying);
+    setShowSongTitle(true);
+    setTimeout(() => setShowSongTitle(false), 3000);
   };
 
   const stopSong = () => {
@@ -56,42 +72,83 @@ const LoveHistory = () => {
     }
     setIsPlaying(false);
     setCurrentSong(null);
+    setShowSongTitle(false);
   };
+
+  const handleMusicIconClick = () => {
+    setShowMusicModal(!showMusicModal);
+    if (!currentSong && !showMusicModal) {
+      playSong(songs[0]);
+    }
+  };
+
+  // Auto-play the first song when component mounts
+  useEffect(() => {
+    if (!currentSong) {
+      playSong(songs[0]);
+    }
+  }, []);
 
   return (
     <div
       style={{
         minHeight: '100vh',
         backgroundColor: '#fff1f2',
-        padding: '2rem',
+        padding: isMobile ? '1rem' : '2rem',
         fontFamily: "'La Belle Aurore', cursive",
         color: '#4b2e2e',
       }}
     >
-      {/* Floating Music Player */}
+      {/* Floating Music Player with song title display */}
       <div
         style={{
           position: 'fixed',
           bottom: '20px',
-          right: '20px',
-          backgroundColor: '#ff85a2',
-          borderRadius: '50%',
-          width: '60px',
-          height: '60px',
+          right: isMobile ? '15px' : '20px',
           display: 'flex',
-          justifyContent: 'center',
           alignItems: 'center',
-          boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+          gap: '10px',
           zIndex: 100,
-          cursor: 'pointer',
-          transition: 'transform 0.3s',
-          ':hover': {
-            transform: 'scale(1.1)'
-          }
         }}
-        onClick={() => setShowMusicModal(!showMusicModal)}
       >
-        <span style={{ fontSize: '24px' }}>🎵</span>
+        {showSongTitle && currentSong && (
+          <div
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.9)',
+              padding: '8px 15px',
+              borderRadius: '20px',
+              boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+              fontSize: isMobile ? '12px' : '14px',
+              color: '#db2777',
+              fontWeight: 'bold',
+              animation: 'fadeIn 0.5s',
+              maxWidth: isMobile ? '150px' : 'none',
+            }}
+          >
+            Now Playing: {currentSong.title}
+          </div>
+        )}
+        
+        <div
+          style={{
+            backgroundColor: '#ff85a2',
+            borderRadius: '50%',
+            width: isMobile ? '50px' : '60px',
+            height: isMobile ? '50px' : '60px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+            cursor: 'pointer',
+            transition: 'transform 0.3s',
+            ':hover': {
+              transform: 'scale(1.1)'
+            }
+          }}
+          onClick={handleMusicIconClick}
+        >
+          <span style={{ fontSize: isMobile ? '20px' : '24px' }}>🎵</span>
+        </div>
       </div>
 
       {/* Music Modal */}
@@ -99,20 +156,21 @@ const LoveHistory = () => {
         <div
           style={{
             position: 'fixed',
-            bottom: '90px',
-            right: '20px',
+            bottom: isMobile ? '80px' : '90px',
+            right: isMobile ? '15px' : '20px',
             backgroundColor: '#fff',
             borderRadius: '1rem',
             padding: '1rem',
             boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
             zIndex: 100,
-            width: '250px',
+            width: isMobile ? '90%' : '250px',
+            maxWidth: '300px',
             background: 'linear-gradient(135deg, #fff5f7 0%, #ffeef2 100%)',
             border: '1px solid #ff85a2'
           }}
         >
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-            <h3 style={{ margin: 0, color: '#db2777' }}>Choose Song</h3>
+            <h3 style={{ margin: 0, color: '#db2777', fontSize: isMobile ? '1.1rem' : '1.2rem' }}>Choose Song</h3>
             <span 
               style={{ cursor: 'pointer', fontSize: '20px', color: '#db2777' }}
               onClick={() => setShowMusicModal(false)}
@@ -174,7 +232,7 @@ const LoveHistory = () => {
                 >
                   {isPlaying ? '❚❚' : '▶'}
                 </button>
-                <span style={{ fontSize: '0.9rem' }}>{currentSong.title}</span>
+                <span style={{ fontSize: isMobile ? '0.8rem' : '0.9rem' }}>{currentSong.title}</span>
               </div>
               <button 
                 onClick={stopSong}
@@ -203,32 +261,33 @@ const LoveHistory = () => {
         style={{ display: 'none' }}
       />
 
-      {/* Grid Layout - Reordered as requested */}
+      {/* Grid Layout - Responsive */}
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-          gap: '2rem',
+          gridTemplateColumns: isMobile ? '1fr' : 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: isMobile ? '1.5rem' : '2rem',
           maxWidth: '1200px',
           margin: '0 auto',
         }}
       >
-        {/* Images Card - Now first */}
+        {/* Images Card */}
         <div
           style={{
             backgroundColor: '#fff',
             borderRadius: '1.5rem',
             boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
-            padding: '2rem',
+            padding: isMobile ? '1.5rem' : '2rem',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
             border: '2px dashed #f9a8d4',
-            background: 'linear-gradient(135deg, #fff9fb 0%, #fff5f7 100%)'
+            background: 'linear-gradient(135deg, #fff9fb 0%, #fff5f7 100%)',
+            order: isMobile ? 1 : 0,
           }}
         >
           <h1 style={{ 
-            fontSize: '2rem', 
+            fontSize: isMobile ? '1.8rem' : '2rem', 
             textAlign: 'center', 
             color: '#be185d', 
             marginBottom: '1.5rem',
@@ -246,7 +305,7 @@ const LoveHistory = () => {
           >
             {/* Actual images */}
             <div style={{
-              height: '120px',
+              height: isMobile ? '100px' : '120px',
               borderRadius: '0.8rem',
               overflow: 'hidden',
               boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
@@ -262,7 +321,7 @@ const LoveHistory = () => {
               />
             </div>
             <div style={{
-              height: '120px',
+              height: isMobile ? '100px' : '120px',
               borderRadius: '0.8rem',
               overflow: 'hidden',
               boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
@@ -278,7 +337,7 @@ const LoveHistory = () => {
               />
             </div>
             <div style={{
-              height: '120px',
+              height: isMobile ? '100px' : '120px',
               borderRadius: '0.8rem',
               overflow: 'hidden',
               boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
@@ -295,7 +354,7 @@ const LoveHistory = () => {
             </div>
             <div style={{
               backgroundColor: '#fce7f3',
-              height: '120px',
+              height: isMobile ? '100px' : '120px',
               borderRadius: '0.8rem',
               display: 'flex',
               justifyContent: 'center',
@@ -314,7 +373,7 @@ const LoveHistory = () => {
               />
             </div>
             <div style={{
-              height: '120px',
+              height: isMobile ? '100px' : '120px',
               borderRadius: '0.8rem',
               overflow: 'hidden',
               boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
@@ -330,7 +389,7 @@ const LoveHistory = () => {
               />
             </div>
             <div style={{
-              height: '120px',
+              height: isMobile ? '100px' : '120px',
               borderRadius: '0.8rem',
               overflow: 'hidden',
               boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
@@ -346,7 +405,7 @@ const LoveHistory = () => {
               />
             </div>
             <div style={{
-              height: '120px',
+              height: isMobile ? '100px' : '120px',
               borderRadius: '0.8rem',
               overflow: 'hidden',
               boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
@@ -362,7 +421,7 @@ const LoveHistory = () => {
               />
             </div>
             <div style={{
-              height: '120px',
+              height: isMobile ? '100px' : '120px',
               borderRadius: '0.8rem',
               overflow: 'hidden',
               boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
@@ -378,7 +437,7 @@ const LoveHistory = () => {
               />
             </div>
             <div style={{
-              height: '120px',
+              height: isMobile ? '100px' : '120px',
               borderRadius: '0.8rem',
               overflow: 'hidden',
               boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
@@ -394,7 +453,7 @@ const LoveHistory = () => {
               />
             </div>
             <div style={{
-              height: '120px',
+              height: isMobile ? '100px' : '120px',
               borderRadius: '0.8rem',
               overflow: 'hidden',
               boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
@@ -413,34 +472,35 @@ const LoveHistory = () => {
           <p style={{ 
             textAlign: 'center', 
             marginTop: '1.5rem', 
-            fontSize: '1.2rem',
+            fontSize: isMobile ? '1.1rem' : '1.2rem',
             color: '#9d174d'
           }}>
             Each picture holds a thousand memories of our love story
           </p>
         </div>
 
-        {/* Love History Card - Now second */}
+        {/* Love History Card */}
         <div
           style={{
             backgroundColor: '#fff',
             borderRadius: '1.5rem',
             boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
-            padding: '2rem',
+            padding: isMobile ? '1.5rem' : '2rem',
             lineHeight: '2.2rem',
             border: '2px dashed #f9a8d4',
-            background: 'linear-gradient(135deg, #fff9fb 0%, #fff5f7 100%)'
+            background: 'linear-gradient(135deg, #fff9fb 0%, #fff5f7 100%)',
+            order: isMobile ? 2 : 0,
           }}
         >
           <h1 style={{ 
-            fontSize: '2rem', 
+            fontSize: isMobile ? '1.8rem' : '2rem', 
             textAlign: 'center', 
             color: '#be185d',
             textShadow: '1px 1px 2px rgba(0,0,0,0.1)'
           }}>
             💌 Our Love memories 💌
           </h1>
-          <p style={{ fontSize: '1.3rem', marginTop: '1.5rem' }}>
+          <p style={{ fontSize: isMobile ? '1.1rem' : '1.3rem', marginTop: '1.5rem' }}>
             Revathi <br /><br />
             Unna ennaku romba romba pudikum ma... Na un kooda irundha neram la enakku unmayaana santhosham erukum.
             <br /><br />
@@ -458,7 +518,7 @@ const LoveHistory = () => {
           </p>
           <p style={{ 
             textAlign: 'right', 
-            fontSize: '1.5rem', 
+            fontSize: isMobile ? '1.3rem' : '1.5rem', 
             color: '#db2777', 
             marginTop: '2rem',
             fontWeight: 'bold'
@@ -467,21 +527,22 @@ const LoveHistory = () => {
           </p>
         </div>
 
-        {/* Miss You Card - Now third */}
+        {/* Miss You Card */}
         <div
           style={{
             backgroundColor: '#fff',
             borderRadius: '1.5rem',
             boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
-            padding: '2rem',
+            padding: isMobile ? '1.5rem' : '2rem',
             display: 'flex',
             flexDirection: 'column',
             border: '2px dashed #f9a8d4',
-            background: 'linear-gradient(135deg, #fff9fb 0%, #fff5f7 100%)'
+            background: 'linear-gradient(135deg, #fff9fb 0%, #fff5f7 100%)',
+            order: isMobile ? 3 : 0,
           }}
         >
           <h1 style={{ 
-            fontSize: '2rem', 
+            fontSize: isMobile ? '1.8rem' : '2rem', 
             textAlign: 'center', 
             color: '#be185d', 
             marginBottom: '1.5rem',
@@ -490,7 +551,7 @@ const LoveHistory = () => {
             💝 I Miss You Lot
           </h1>
           <p style={{ 
-            fontSize: '1.3rem', 
+            fontSize: isMobile ? '1.1rem' : '1.3rem', 
             textAlign: 'center',
             color: '#831843'
           }}>
@@ -509,21 +570,22 @@ const LoveHistory = () => {
           </div>
         </div>
 
-        {/* Love You Card - Now fourth */}
+        {/* Love You Card */}
         <div
           style={{
             backgroundColor: '#fff',
             borderRadius: '1.5rem',
             boxShadow: '0 10px 25px rgba(0,0,0,0.1)',
-            padding: '2rem',
+            padding: isMobile ? '1.5rem' : '2rem',
             display: 'flex',
             flexDirection: 'column',
             border: '2px dashed #f9a8d4',
-            background: 'linear-gradient(135deg, #fff9fb 0%, #fff5f7 100%)'
+            background: 'linear-gradient(135deg, #fff9fb 0%, #fff5f7 100%)',
+            order: isMobile ? 4 : 0,
           }}
         >
           <h1 style={{ 
-            fontSize: '2rem', 
+            fontSize: isMobile ? '1.8rem' : '2rem', 
             textAlign: 'center', 
             color: '#be185d', 
             marginBottom: '1.5rem',
@@ -532,7 +594,7 @@ const LoveHistory = () => {
             ❤️ I Love You Lot
           </h1>
           <p style={{ 
-            fontSize: '1.3rem', 
+            fontSize: isMobile ? '1.1rem' : '1.3rem', 
             textAlign: 'center',
             color: '#831843'
           }}>
@@ -543,7 +605,7 @@ const LoveHistory = () => {
             Through every up and every down, <br />
             My love for you will never drown.<br />
             I will never for got our memories 
-          I don't know what destiny have  planned for us.... but I konw one thing I can't unlove You and You eill alwayshave my heart...
+          I don't know what destiny have planned for us.... but I know one thing I can't unlove You and You will always have my heart...
           </p>
           <div style={{ 
             textAlign: 'center', 
@@ -569,6 +631,10 @@ const LoveHistory = () => {
             50% { transform: scale(1); }
             75% { transform: scale(1.1); }
             100% { transform: scale(1); }
+          }
+          @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
           }
         `}
       </style>
